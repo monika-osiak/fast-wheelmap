@@ -8,8 +8,8 @@ class PointBase(BaseModel):
     description: Optional[str] = None
     lat: float
     long: float
-    plus_code: str
-    category: str
+    plus_code: Optional[str] = None
+    category: Optional[str] = None
     active: bool
 
 
@@ -27,7 +27,7 @@ class Point(PointBase):
 class PlaceBase(BaseModel):
     name: str
     description: Optional[str] = None
-    plus_code: str
+    plus_code: Optional[str] = None
     country: str
     voivodeship: str
     city: str
