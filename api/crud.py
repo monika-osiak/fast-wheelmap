@@ -8,7 +8,10 @@ def create_point(db: Session, point: schemas.PointCreate):
         name=point.name,
         description=point.description,
         lat=point.lat,
-        long=point.long
+        long=point.long,
+        plus_code=point.plus_code,
+        category=point.category,
+        active=point.active
     )
     db.add(db_point)
     db.commit()
@@ -35,12 +38,14 @@ def create_place(db: Session, place: schemas.PlaceCreate):
     db_place = models.Place(
         name=place.name,
         description=place.description,
+        plus_code=place.plus_code,
         country=place.country,
         voivodeship=place.voivodeship,
         city=place.city,
         postal_code=place.postal_code,
         street=place.street,
-        number=place.number
+        number=place.number,
+        accessibility=place.accessibility
     )
     db.add(db_place)
     db.commit()
