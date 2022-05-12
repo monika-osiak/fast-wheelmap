@@ -21,6 +21,11 @@ def get_db():
         db.close()
 
 
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
+
+
 @app.post("/points/", response_model=schemas.Point)
 def create_point(point: schemas.PointCreate, db: Session = Depends(get_db)):
     db_point = crud.get_point_by_lat_lng(db, point.lat, point.lng)
