@@ -2,6 +2,9 @@ from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
 
 from . import crud, models, schemas
+# import crud
+# import models
+# import schemas
 from .database import SessionLocal, engine
 
 models.Base.metadata.create_all(bind=engine)
@@ -20,7 +23,7 @@ def get_db():
 
 @app.post("/points/", response_model=schemas.Point)
 def create_point(point: schemas.PointCreate, db: Session = Depends(get_db)):
-    db_point = crud.get_point_by_lat_long(db, point.lat, point.long)
+    db_point = crud.get_point_by_lat_lng(db, point.lat, point.lng)
     if db_point:
         raise HTTPException(status_code=400, detail="This point already exists")
     return crud.create_point(db=db, point=point)
@@ -45,7 +48,6 @@ def create_place(place: schemas.PlaceCreate, db: Session = Depends(get_db)):
     db_place = crud.get_place_by_address(
         db,
         place.country,
-        place.voivodeship,
         place.city,
         place.postal_code,
         place.street,

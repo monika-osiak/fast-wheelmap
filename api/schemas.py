@@ -7,10 +7,8 @@ class PointBase(BaseModel):
     name: str
     description: Optional[str] = None
     lat: float
-    long: float
-    plus_code: Optional[str] = None
+    lng: float
     category: Optional[str] = None
-    active: bool
 
 
 class PointCreate(PointBase):
@@ -27,14 +25,23 @@ class Point(PointBase):
 class PlaceBase(BaseModel):
     name: str
     description: Optional[str] = None
-    plus_code: Optional[str] = None
+    lat: float
+    lng: float
     country: str
-    voivodeship: str
     city: str
     postal_code: str
     street: str
     number: str
-    accessibility: dict
+    toaletaAkt: bool
+    toaletaElektr: bool
+    parking: bool
+    winda: bool
+    brakProgow: bool
+    swobodnyAkt: bool
+    swobodnyElektr: bool
+    drzwiAkt: bool
+    drzwiElektr: bool
+    rownyTeren: bool
 
 
 class PlaceCreate(PlaceBase):

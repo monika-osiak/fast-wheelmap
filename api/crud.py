@@ -1,6 +1,8 @@
 from sqlalchemy.orm import Session
 
 from . import models, schemas
+# import models
+# import schemas
 
 
 def create_point(db: Session, point: schemas.PointCreate):
@@ -8,10 +10,8 @@ def create_point(db: Session, point: schemas.PointCreate):
         name=point.name,
         description=point.description,
         lat=point.lat,
-        long=point.long,
-        plus_code=point.plus_code,
-        category=point.category,
-        active=point.active
+        lng=point.lng,
+        category=point.category
     )
     db.add(db_point)
     db.commit()
@@ -23,10 +23,10 @@ def get_point(db: Session, point_id: int):
     return db.query(models.Point).filter(models.Point.id == point_id).first()
 
 
-def get_point_by_lat_long(db: Session, lat: float, long: float):
+def get_point_by_lat_lng(db: Session, lat: float, lng: float):
     return db.query(models.Point)\
         .filter(models.Point.lat == lat)\
-        .filter(models.Point.long == long)\
+        .filter(models.Point.lng == lng)\
         .first()
 
 
@@ -38,14 +38,23 @@ def create_place(db: Session, place: schemas.PlaceCreate):
     db_place = models.Place(
         name=place.name,
         description=place.description,
-        plus_code=place.plus_code,
+        lat=place.lat,
+        lng=place.lng,
         country=place.country,
-        voivodeship=place.voivodeship,
         city=place.city,
         postal_code=place.postal_code,
         street=place.street,
         number=place.number,
-        accessibility=place.accessibility
+        toaletaAkt=place.toaletaAkt,
+        toaletaElektr=place.toaletaElektr,
+        parking=place.parking,
+        winda=place.winda,
+        brakProgow=place.brakProgow,
+        swobodnyAkt=place.swobodnyAkt,
+        swobodnyElektr=place.swobodnyElektr,
+        drzwiAkt=place.drzwiAkt,
+        drzwiElektr=place.drzwiElektr,
+        rownyTeren=place.rownyTeren
     )
     db.add(db_place)
     db.commit()
@@ -60,7 +69,6 @@ def get_place(db: Session, place_id: int):
 def get_place_by_address(
         db: Session,
         country: str,
-        voivodeship: str,
         city: str,
         postal_code: str,
         street: str,
@@ -68,7 +76,6 @@ def get_place_by_address(
     ):
     return db.query(models.Place)\
         .filter(models.Place.country == country)\
-        .filter(models.Place.voivodeship == voivodeship) \
         .filter(models.Place.city == city) \
         .filter(models.Place.postal_code == postal_code) \
         .filter(models.Place.street == street) \
