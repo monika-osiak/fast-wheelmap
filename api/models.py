@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, PickleType, String, Boolean, Float
-from api.database import Base
+# from api.database import Base
+from database import Base
 
 
 class Point(Base):
@@ -9,10 +10,8 @@ class Point(Base):
     name = Column(String)
     description = Column(String)
     lat = Column(Float, index=True)
-    long = Column(Float, index=True)
-    plus_code = Column(String)
+    lng = Column(Float, index=True)
     category = Column(String)
-    active = Column(Boolean, default=True)
 
 
 class Place(Base):
@@ -20,11 +19,20 @@ class Place(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
     description = Column(String)
-    plus_code = Column(String)
+    lat = Column(Float, index=True)
+    lng = Column(Float, index=True)
     country = Column(String)
-    voivodeship = Column(String)
     city = Column(String)
-    postal_code = Column(String)
+    postcode = Column(String)
     street = Column(String)
     number = Column(String)
-    accessibility = Column(PickleType)
+    toaletaAkt = Column(Boolean)
+    toaletaElektr = Column(Boolean)
+    parking = Column(Boolean)
+    winda = Column(Boolean)
+    brakProgow = Column(Boolean)
+    swobodnyAkt = Column(Boolean)
+    swobodnyElektr = Column(Boolean)
+    drzwiAkt = Column(Boolean)
+    drzwiElektr = Column(Boolean)
+    rownyTeren = Column(Boolean)
