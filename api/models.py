@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, PickleType, String, Boolean, Float
-# from api.database import Base
-from database import Base
+from api.database import Base
+# from database import Base
 
 
 class Point(Base):
